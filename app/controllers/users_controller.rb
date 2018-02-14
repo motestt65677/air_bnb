@@ -2,6 +2,7 @@ class UsersController < Clearance::UsersController
 	
 	def create
 		User.create(user_params)
+		redirect_to listings_path
 	end
 
  	private

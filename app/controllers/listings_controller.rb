@@ -4,7 +4,11 @@ class ListingsController < ApplicationController
 	end
 
 	def new
-		@listing = Listing.new
+		if current_user
+			@listing = Listing.new
+		else
+			redirect_to listings_path
+		end
 	end
 
 	def create
