@@ -8,20 +8,34 @@
 
 require 'faker'
 
-user = {}
-user['password'] = 'asdf'
-user['confirmation_token'] = 'asdf'
+# user = {}
+# user['password'] = 'asdf'
+# user['confirmation_token'] = 'asdf'
 
-ActiveRecord::Base.transaction do
-  20.times do 
-    user['first_name'] = Faker::Name.first_name 
-    user['last_name'] = Faker::Name.last_name
-    user['email'] = Faker::Internet.email
-    user['gender'] = rand(1..2)
-    user['phone'] = Faker::PhoneNumber.phone_number
-    user['country'] = Faker::Address.country
-    user['birthdate'] = Faker::Date.between(50.years.ago, Date.today)
+# ActiveRecord::Base.transaction do
+#   20.times do 
+#     user['first_name'] = Faker::Name.first_name 
+#     user['last_name'] = Faker::Name.last_name
+#     user['email'] = Faker::Internet.email
+#     user['gender'] = rand(1..2)
+#     user['phone'] = Faker::PhoneNumber.phone_number
+#     user['country'] = Faker::Address.country
+#     user['birthdate'] = Faker::Date.between(50.years.ago, Date.today)
 
-    User.create(user)
-  end
-end 
+#     User.create(user)
+#   end
+# end 
+# listing = {}
+# uids = []
+# User.all.each { |u| uids << u.id }
+
+# ActiveRecord::Base.transaction do
+#   40.times do 
+#     listing['title'] = Faker::App.name
+#     listing['description'] = Faker::Hipster.sentence
+
+#     listing['user_id'] = uids.sample
+
+#     Listing.create(listing)
+#   end
+# end
