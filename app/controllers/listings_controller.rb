@@ -1,6 +1,8 @@
+
 class ListingsController < ApplicationController
 	def index
-		@listings = Listing.all
+		# @listings = Listing.all
+		@listings = Listing.order(created_at: :asc).page(params[:page])
 	end
 
 	def new

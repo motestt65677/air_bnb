@@ -8,6 +8,28 @@
 
 require 'faker'
 
+
+# user = {}
+# user[:password] = "jlksdf"
+# emails = ["sssr@example.com", "eeer@example.com", "sssr@example.com"]
+
+# ActiveRecord::Base.transaction do
+#     3.times do |i| 
+#         user[:email] = emails[i]
+#         User.create!(user)
+#     end
+#     # user1 = User.create(email: 'sss@example.com')
+#     # user2 = User.create(email: 'eeef@example.com')
+#     # user3 = User.create(email: 'sss@example.com')
+
+#     # p user1.errors.full_messages
+#     # p user2.errors.full_messages
+#     # p user3.errors.full_messages
+# end
+
+
+
+
 # user = {}
 # user['password'] = 'asdf'
 # user['confirmation_token'] = 'asdf'
@@ -25,17 +47,17 @@ require 'faker'
 #     User.create(user)
 #   end
 # end 
-# listing = {}
-# uids = []
-# User.all.each { |u| uids << u.id }
+listing = {}
+uids = []
+User.all.each { |u| uids << u.id }
 
-# ActiveRecord::Base.transaction do
-#   40.times do 
-#     listing['title'] = Faker::App.name
-#     listing['description'] = Faker::Hipster.sentence
+ActiveRecord::Base.transaction do
+  40.times do 
+    listing['title'] = Faker::App.name
+    listing['description'] = Faker::Hipster.sentence
 
-#     listing['user_id'] = uids.sample
+    listing['user_id'] = uids.sample
 
-#     Listing.create(listing)
-#   end
-# end
+    Listing.create(listing)
+  end
+end
