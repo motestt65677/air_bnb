@@ -14,8 +14,16 @@ class ListingsController < ApplicationController
 	end
 
 	def create
-		current_user.listings.create(listing_params)
-		redirect_to listings_path
+		@listing = current_user.listings.new(listing_params)
+		if @listing.save
+			redirect_to @listing
+		else
+			redirect_to new_listing_path
+		end
+	end
+
+	def edit
+		@listing = Listing.find(params[:id])
 	end
 
 	def show
