@@ -9,22 +9,27 @@
       <h1>Listings</h1>
 			<%= link_to "Create", new_listing_path, class: "btn btn-dark"%>
 
+			<% if @listings.length > 0%>
+				<%@listings.each do |listing|%>
+					<p><%=listing.title%></p>
+					<p><%=listing.description%></p>
+					<p><%=listing.created_at%></p>
+					<%= link_to "Show", listing_path(listing)%>
+					<%= link_to "Edit", edit_listing_path(listing)%>
+					<%= link_to 'Delete', listing_path(listing), 
+																		method: :delete, 
+				                            data: { confirm: 'Are you sure?' } %> 
+				  <hr>			
+				<%end%>
+			<%else%>
+				<p>Please add a new listing</p>
+			<%end%>
+		<%= paginate @listings %>
 
-			<%@listings.each do |listing|%>
-				<p><%=listing.title%></p>
-				<p><%=listing.description%></p>
-				<p><%=listing.created_at%></p>
-				<%= link_to "Show", listing_path(listing)%>
-				<%= link_to "Edit", edit_listing_path(listing)%>
-				<%= link_to 'Delete', listing_path(listing), 
-																	method: :delete, 
-			                            data: { confirm: 'Are you sure?' } %> 
-			  <hr>			<%end%>
-
-			<%= paginate @listings %>
     </div>
     <div class="col-3">
     </div>
+
   </div>
 </div>
 

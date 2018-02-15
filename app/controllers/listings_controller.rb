@@ -2,7 +2,11 @@
 class ListingsController < ApplicationController
 	def index
 		# @listings = Listing.all
-		@listings = Listing.order(created_at: :asc).page(params[:page])
+		if current_user
+			@listings = current_user.listings.page(params[:page])
+		else
+			redirect_to sign_in_path
+		end
 	end
 
 	def new
@@ -25,7 +29,14 @@ class ListingsController < ApplicationController
 	def edit
 		@listing = Listing.find(params[:id])
 	end
-
+	def update
+		@listing = Listing.find(params[:id])
+		if @listing.update_attributes(listing_params)
+			redirect_to listings_path
+		else
+			redirect_to edit_listing_path(@listing)
+		end
+	end
 	def show
 		@listing = Listing.find(params[:id])
 	end
