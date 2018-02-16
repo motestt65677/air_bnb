@@ -3,7 +3,7 @@ class ListingsController < ApplicationController
 	def index
 		# @listings = Listing.all
 		if current_user
-			@listings = current_user.listings.page(params[:page])
+			@listings = Listing.all.page(params[:page])
 		else
 			redirect_to sign_in_path
 		end
