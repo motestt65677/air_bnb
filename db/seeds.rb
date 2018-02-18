@@ -47,17 +47,17 @@ require 'faker'
 #     User.create(user)
 #   end
 # end 
-# listing = {}
-# uids = []
-# User.all.each { |u| uids << u.id }
+listing = {}
+uids = []
+User.all.each { |u| uids << u.id }
 
-# ActiveRecord::Base.transaction do
-#   40.times do 
-#     listing['title'] = Faker::App.name
-#     listing['description'] = Faker::Hipster.sentence
+ActiveRecord::Base.transaction do
+  40.times do 
+    listing['title'] = Faker::App.name
+    listing['description'] = Faker::Hipster.sentence
 
-#     listing['user_id'] = uids.sample
+    listing['user_id'] = uids.sample
 
-#     Listing.create(listing)
-#   end
-# end
+    Listing.create(listing)
+  end
+end

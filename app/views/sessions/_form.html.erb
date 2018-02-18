@@ -1,22 +1,48 @@
-<%= form_for :session, url: session_path do |form| %>
-  <div class="text-field">
-    <%= form.label :email %>
-    <%= form.text_field :email, type: 'email' %>
-  </div>
+<main>
+<div class="row">
+  <div class="col-4"></div>
+  <div class="col-4">
+    <div class= "row">
+      <div class="col-6"></div>
+      <div class="col-6">
+        
 
-  <div class="password-field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
+        <div class="form-group">
+          <%= form_for :session, url: session_path do |form| %>
+          <div class="text-field">
+            <strong> <%= form.label :email %></strong>
+            <%= form.text_field :email, type: 'email', class:"form-control" %>
+          </div>
 
-  <div class="submit-field">
-    <%= form.submit %>
-  </div>
+          <div class="password-field">
+            <strong> <%= form.label :password %></strong>
+            <%= form.password_field :password, class:"form-control" %>
+          </div><br>
 
-  <div class="other-links">
-    <% if Clearance.configuration.allow_sign_up? %>
-      <%= link_to t(".sign_up"), sign_up_path %>
+          <div class="submit-field float-right">
+            <%= form.submit "Sign In" %>
+          </div>
+
+          <div class="other-links">
+            <div></div>
+            <% if Clearance.configuration.allow_sign_up? %>
+              <%= link_to t(".sign_up"), sign_up_path %>
+            <% end %>
+
+            <%= link_to "Sign in with Facebook", "/auth/facebook", class:"fb-login-button" %>
+
+            <%= link_to t(".forgot_password"), new_password_path %>
+
+          </div>      
+        </div>
+      </div>
+    </div>
+    
     <% end %>
-    <%= link_to t(".forgot_password"), new_password_path %>
+    
+
+
   </div>
-<% end %>
+  <div class="col-4"></div>
+</div>
+</main>

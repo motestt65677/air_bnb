@@ -1,37 +1,65 @@
 
 
 
-<div class="container">
+<main>
   <div class="row">
     <div class="col-3">
+
     </div>
     <div class="col-6">
-      <h1>Listings</h1>
-			<%= link_to "Create", new_listing_path, class: "btn btn-dark"%>
+			<%= link_to "Create", new_listing_path, class: "btn btn-outline-secondary"%>
+			<hr>
+			<%@listings.each do |listing|%>
 
-			<% if @listings.length > 0%>
-				<%@listings.each do |listing|%>
-					<p><%=listing.title%></p>
-					<p><%=listing.description%></p>
-					<p><%=listing.created_at%></p>
-					<%= link_to "Show", listing_path(listing)%>
-					<%= link_to "Edit", edit_listing_path(listing)%>
-					<%= link_to 'Delete', listing_path(listing), 
-																		method: :delete, 
-				                            data: { confirm: 'Are you sure?' } %> 
-				  <hr>			
-				<%end%>
-			<%else%>
-				<p>Please add a new listing</p>
+	    	<div class="row">
+	    		
+	    		<div class="col-10">
+
+							<%= link_to listing_path(listing), class: "list-group-item list-group-item-action list-group-item-light" do%> 
+								<h2>	<%=listing.title%></h2>
+								<div><%=User.find(listing.user_id).first_name%></div>
+
+							<%end%>
+	                      
+
+
+
+	    		</div>
+
+					<div class="col-2">
+							<div class="btn-container">
+
+								<span> &nbsp</span>
+									<%if current_user.id == listing.user_id%>
+									<%= link_to "Edit", edit_listing_path(listing), class:"btn btn-outline-primary btn-sm btn-block"%>
+
+									<%= link_to 'Delete', listing_path(listing), class:"btn btn-outline-danger btn-sm btn-block",
+																						method: :delete, 
+								                            data: { confirm: 'Are you sure?' }%> 
+							  <%end%>				
+							</div>      
+
+
+	    		</div>
+
+
+
+
+
+
+	    	</div>
 			<%end%>
-		<%= paginate @listings %>
+
+			<hr>
+
+			<%= paginate @listings %>
 
     </div>
     <div class="col-3">
     </div>
 
   </div>
-</div>
+</main>
 
 
 

@@ -1,14 +1,28 @@
-<h1>Edit Listing</h1>
+<main>
+	<div class="row">
+		<div class="col-4"></div>
+		<div class="col-4">
+			<%=form_for @listing do |f|%>
+				<div class="form-group">
+				  <div>	<strong> <%= f.label :title %></strong></div>
+				  <div>	<%= f.text_field :title, class:"form-control" %></div>
 
-<%=form_for @listing do |f|%>
-  <%= f.label :title %>:
-  <%= f.text_field :title %><br />
-
-  <%= f.label :description %>:
-  <%= f.text_field :description %><br />
-   
-  <%= f.submit %>
+				  <div>	<strong> <%= f.label :description %></strong></div>
+				  <div>	<%= f.text_area :description, class:"form-control", rows:"5" %></div><br>
+				  <%= f.submit :Update, class:"btn btn-outline-primary float-right" %>
+				</div>
+			<%end%>
+			
 
 
-<%end%>
+
+		</div>
+		<div class="col-4"></div>
+
+	</div>
+
+</main>
+
+
+
 
