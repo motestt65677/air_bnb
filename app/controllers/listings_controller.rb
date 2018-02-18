@@ -5,6 +5,7 @@ class ListingsController < ApplicationController
 		if signed_in?
 			@listings = Listing.order(created_at: :desc).page(params[:page])
 		else
+			redirect_to sign_in_path
 		end
 	end
 
