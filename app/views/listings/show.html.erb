@@ -1,0 +1,48 @@
+
+<main>
+	<div class="container">
+	  <div class="row">
+	    <div class="col-3">
+	    </div>
+	    <div class="col-6">
+	    	<h1> <%=@listing.title%></h1>
+				<p> <%=@listing.description%></p>
+				<p><strong>Amenities</strong></p>
+				<ul>
+
+				<% @listing.amenities.each do |amenity| %>
+					<li><%=amenity%></li>
+				<% end %>
+				
+				</ul>
+				<p><%= image_tag @listing.image_url, class:"img-thumbnail" %></p>
+	    </div>
+	    <div class="col-3">
+	    </div>
+	  </div>
+	</div>
+</main>
+
+
+
+
+	<nav id="show_bot_nav" class="navbar fixed-bottom navbar-light bg-light">
+		<footer class="container">
+		  <ul class="navbar-nav mr-auto">
+		    <li class="nav-item">
+		    	<strong><%="$ #{@listing.price}/Night"%></strong>
+		    </li>
+		  </ul>
+		  <ul class="navbar-nav float-right">
+		    <li class="nav-item">
+		    	<a href="/listings/<%=@listing.id%>/reservations/new" class="btn btn-outline-danger brn-large btn-block" id="wide-btn">Book</a>
+
+
+		    </li>
+		  </ul>	
+		</footer>
+	</nav>
+
+
+
+

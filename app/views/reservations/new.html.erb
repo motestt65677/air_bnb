@@ -1,0 +1,68 @@
+<main>
+	<div class="container">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-4">
+
+
+
+				<h1>New Reservation</h1>
+				<%= form_for [@listing, @reservation] do |form|%>
+					<input type="hidden" value=<%= @listing.price %> id="price">
+					<div><strong>	<%= form.label :start_date %></strong></div>
+					<div>	<%= form.text_field :start_date, class:"form-control", id:"calendar" %></div>
+					<div>Total: <span id="price_span"></span></div>
+					<div>
+				  	<%= form.submit "Proceed to Payment", class:"btn btn-outline-primary float-right" %>	
+					</div>
+				<%end%>
+
+			</div>
+			<div class="col-4"></div>
+		</div>
+	</div>
+
+</main>
+
+
+<script type="text/javascript">
+	
+  flatpickr("#calendar", {minDate: "today", allowInput: true, mode: "range",disable:<%=raw @listing.used_date%>});
+
+  Date.daysBetween = function( date1, date2 ) {
+    //Get 1 day in milliseconds
+    var one_day=1000*60*60*24;
+
+    // Convert both dates to milliseconds
+    // Calculate the difference in milliseconds
+    var difference_ms = date2 - date1;
+      
+    // Convert back to days and return
+    return Math.round(difference_ms/one_day); 
+  }
+
+  function check_price(){
+    calendar.addEventListener("change", function(){
+      const price_span = document.getElementById("price_span");
+      const listing_price = document.getElementById("price");
+
+      days = calendar.value.split(" to ");
+      start_date = days[0];
+      end_date = days[1];
+
+    
+
+      
+      time_stay = Date.daysBetween(Date.parse(start_date), Date.parse(end_date));
+      total_price = time_stay * listing_price.value;
+      price_span.innerHTML = "$ "+ total_price;
+
+
+    })
+
+  }
+  
+  check_price();
+
+
+</script>

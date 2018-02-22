@@ -1,14 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Airbnb</title>
-    <%= csrf_meta_tags %>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tag %>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <!-- Load the Hosted Fields component. -->
+  <script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
 
-  <body>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="/listings">Air-BnB</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+
+      </li>
+    </ul>
+
+    <ul class="navbar-nav float-right">
+      <li class="nav-item">
+        <div class="container">
+          <p> <%= link_to "Trips", "/reservation/itinerary", class:"nav-link"%></p>  
+        </div>
+
+      </li>
+      <li class="nav-item">
+        <div id="header">
+          <% if signed_in? -%>
+            <%= button_to t(".sign_out"), sign_out_path, method: :delete, class: "btn btn-outline-light" %>
+          <% else -%>
+            <%= link_to t(".sign_in"), sign_in_path, class: "btn btn-outline-light" %>
+          <% end -%>
+        </div>
+      </li> 
+    </ul>
+    
+  </div>
+</nav>
+
+ <div id="flash">
+    <% flash.each do |key, value| -%>
+      <div id="flash_<%= key %>" class="alert alert-warning"><%=h value %></div>
+    <% end %>
+  </div>
+
+  <div class="container-fluid">
     <%= yield %>
-  </body>
+  </div>  
+  
+</body>
 </html>
