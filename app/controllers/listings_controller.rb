@@ -2,8 +2,19 @@
 class ListingsController < ApplicationController
 	def index
 		# @listings = Listing.all
+		@listing = Listing.new
 		if signed_in?
-			@listings = Listing.order(created_at: :desc).page(params[:page])
+			
+			if params[:cities] == ""
+				@listings = Listing.order(created_at: :desc).page(params[:page])
+				return
+			elsif params[:cities]
+				@listings = Listing.where(city: params[:cities]).page(params[:page])
+				@city = params[:cities]
+			else
+				@listings = Listing.order(created_at: :desc).page(params[:page])
+			end
+			
 		else
 			redirect_to sign_in_path
 		end
@@ -23,7 +34,13 @@ class ListingsController < ApplicationController
 	end
 
 	def create
+		
 		if current_user.moderator?
+			p @listing
+			if @listing.amenities == nil
+				
+			end
+
 			@listing = current_user.listings.new(listing_params)
 			if @listing.save
 				redirect_to @listing
@@ -60,6 +77,6 @@ class ListingsController < ApplicationController
 
 	private
 	def listing_params
-    params.require(:listing).permit(:title, :description)
+    params.require(:listing).permit(:title, :description, :image, :amenities => [])
   end
 end

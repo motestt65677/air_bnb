@@ -44,7 +44,10 @@ gem 'kaminari'
 
 gem "clearance"
 
-gem "shotgun"
+gem 'carrierwave'
+gem 'fog'
+
+gem 'braintree'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

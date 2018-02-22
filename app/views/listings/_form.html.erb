@@ -1,0 +1,23 @@
+<div><strong>	<%= form.label :title %></strong></div>
+<div>	<%= form.text_field :title, class:"form-control" %></div>
+
+<div><strong>	<%= form.label :description %></strong></div>
+<div> <%= form.text_area :description, class:"form-control", rows:"5" %></div>
+
+<div>
+	<%= form.label :Wifi %>
+	<%=form.check_box :amenities, {multiple:true}, "Wifi", nil%>
+</div>
+<div>
+	<span>Cable TV</span>
+	<%=form.check_box :amenities, {multiple:true}, "Cable TV", nil%>
+</div>
+<div>
+	<span>Air Conditioning</span>
+	<%=form.check_box :amenities, {multiple:true}, "Air Conditioning", nil%>
+</div>
+
+<br>
+<div class="field">
+  <%= form.file_field :image %>
+</div>

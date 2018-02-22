@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
 
 	root "listings#index"
-  resources :listings
+  resources :listings do
+    resources :reservations
+  end
+
+  get 'payment/:reservation_id/new' => "payments#new", as:"new_payment"
+
+  post 'payment/:reservation_id/checkout' => "payments#checkout", as: "check_out"
+
+
 
 	get "/auth/:provider/callback" => "sessions#create_from_omniauth"  	
 	
@@ -16,5 +24,6 @@ Rails.application.routes.draw do
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up" => "clearance/users#new", as: "sign_up"
+  get "/reservation/itinerary" => "reservations#itinerary", as:"itinerary"
 	
 end

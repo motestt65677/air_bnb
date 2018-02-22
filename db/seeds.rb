@@ -8,6 +8,12 @@
 
 require 'faker'
 
+# cities = %w(Kabul London Taipei Kuala Lumpur Canberra Beijing Berlin Moscow Seoul Pyongyang Manila Cape_Town Rome Tokyo)
+# listings = Listing.all
+
+# listings.each do |listing|
+#   listing.update_attribute(:city, cities.sample )
+# end
 
 # user = {}
 # user[:password] = "jlksdf"
@@ -46,18 +52,18 @@ require 'faker'
 
 #     User.create(user)
 #   end
-# end 
-listing = {}
-uids = []
-User.all.each { |u| uids << u.id }
+# # end 
+# listing = {}
+# uids = []
+# User.all.each { |u| uids << u.id }
 
-ActiveRecord::Base.transaction do
-  40.times do 
-    listing['title'] = Faker::App.name
-    listing['description'] = Faker::Hipster.sentence
+# ActiveRecord::Base.transaction do
+#   40.times do 
+#     listing['title'] = Faker::App.name
+#     listing['description'] = Faker::Hipster.sentence
 
-    listing['user_id'] = uids.sample
+#     listing['user_id'] = uids.sample
 
-    Listing.create(listing)
-  end
-end
+#     Listing.create(listing)
+#   end
+# end
