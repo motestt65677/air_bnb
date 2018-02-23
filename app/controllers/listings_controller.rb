@@ -36,10 +36,6 @@ class ListingsController < ApplicationController
 	def create
 		
 		if current_user.moderator?
-			p @listing
-			if @listing.amenities == nil
-				
-			end
 
 			@listing = current_user.listings.new(listing_params)
 			if @listing.save
@@ -77,6 +73,13 @@ class ListingsController < ApplicationController
 
 	private
 	def listing_params
-    params.require(:listing).permit(:title, :description, :image, :amenities => [])
+
+		if params[:listing][:image].count == 0 
+	    params.require(:listing).permit(:title, :description, {amenities: []})
+
+		else
+  	  params.require(:listing).permit(:title, :description, {image: [], amenities: []})
+
+		end
   end
 end

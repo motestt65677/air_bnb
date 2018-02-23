@@ -23,7 +23,8 @@ a:link{
 
 
 main{
-	padding-top: 5em;
+  padding-top: 5em;
+	padding-bottom: 10em;
 }
 
 .text_c{
@@ -41,4 +42,17 @@ img{
 
 #wide-btn{
 	width: 20em;
+}
+
+
+.tales {
+  width: 100%;
+}
+.carousel-inner{
+  width:100%;
+  max-height: 20em !important;
+}
+
+.bot-padding{
+  padding-bottom: 3em
 }

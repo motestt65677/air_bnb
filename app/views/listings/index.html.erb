@@ -12,14 +12,17 @@
       <%=form_tag '/listings', id:"city_form", method:"get" do %>
         <%= select_tag 'cities', options_for_select(Listing.pluck(:city).uniq, @city),prompt: "All Cities"%>
       <%end%>
-
 			<hr>
 	    <div class="row">
-
 			<%@listings.each do |listing|%>
 
 	    		<div class="col-5">
-						<p><%= image_tag listing.image, class:"img-thumbnail" %></p>
+            <%if listing.image.count != 0 %>
+                <p><%= image_tag listing.image[0], class:"img-thumbnail" %></p>
+            <%else %>
+              <p><%= image_tag "gallery/default.jpg", class:"img-thumbnail"%> </p>
+            <%end%>
+						
 
 						<%= link_to listing_path(listing), class: "list-group-item list-group-item-action list-group-item-light" do%> 
 							<h5>	<%=listing.title%></h5>
