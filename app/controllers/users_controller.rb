@@ -1,7 +1,9 @@
 class UsersController < Clearance::UsersController
 	
 	def create
-		User.create(user_params)
+		@user = User.create(user_params)
+    UserMailer.welcome_email(@user).deliver_now
+
 		redirect_to sign_in_path
 	end
 
