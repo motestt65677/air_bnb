@@ -1,8 +1,12 @@
 <main>
   <div class="container">
+
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6" style="text-align:center;">
+
+
+
         <h4> <strong><%= @reservation.listing.title%></strong> </h4>
         <p> Trip Duration: <%= @reservation.start_date%> - <%=@reservation.end_date%></p>
         <p> Total: $<%=@reservation.price%></p>
@@ -16,10 +20,28 @@
           
         </p>
 
-        <%= image_tag @reservation.listing.image, class:"img-thumbnail" %>                                                                                                                              
+                                                                                                                        
       </div>
-      <div class="col-3></div>
+
+
+
+
+      <div class="col-3"> </div>
+
+      
+
     </div>
+
+
+    <div class="row bot-padding">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <%= render partial: '/reservations/carousel' %>              
+      </div>
+      <div class="col-3"></div>
+    </div>  
+      
+
 
   </div>
 

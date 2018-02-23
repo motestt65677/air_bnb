@@ -14,7 +14,6 @@ class ReservationsController < ApplicationController
       listing_id: listing.id
       )
     @reservation.save
-
     redirect_to new_payment_path(@reservation)
   end
 
@@ -24,9 +23,7 @@ class ReservationsController < ApplicationController
   end
 
   def show 
-
     @reservation = Reservation.find(params[:id])
-
   end
   private
 

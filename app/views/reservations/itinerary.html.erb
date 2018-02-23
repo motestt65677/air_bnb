@@ -14,7 +14,12 @@
 
             <%= link_to listing_reservation_path(reservation.listing, reservation) do %>
               <div class="list-group-item list-group-item-action list-group-item-light">
-                <p><%= image_tag listing.image, class:"img-thumbnail" %></p>
+                <%if listing.image.count != 0 %>
+                    <p><%= image_tag listing.image[0], class:"img-thumbnail" %></p>
+                <%else %>
+                  <p><%= image_tag "gallery/default.jpg", class:"img-thumbnail"%> </p>
+                <%end%>
+                
                 <h5>  <%=listing.title%></h5>
                 <p> <%="#{reservation.start_date} - #{reservation.end_date}"%></p>
               </div>
