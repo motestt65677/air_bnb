@@ -3,10 +3,10 @@
 
 <main>
   <div class="row">
-    <div class="col-3">
+    <div class="col-2">
 
     </div>
-    <div class="col-6">
+    <div class="col-8">
 			<%= link_to "Create", new_listing_path, class: "btn btn-outline-secondary"%>
 
       <%=form_tag '/listings', id:"city_form", method:"get" do %>
@@ -16,7 +16,7 @@
 	    <div class="row">
 			<%@listings.each do |listing|%>
 
-	    		<div class="col-5">
+	    		<div class="col-4">
             <%if listing.image.count != 0 %>
                 <p><%= image_tag listing.image[0], class:"img-thumbnail" %></p>
             <%else %>
@@ -60,7 +60,7 @@
 			<%= paginate @listings %>
 
     </div>
-    <div class="col-3">
+    <div class="col-2">
     </div>
 
   </div>
