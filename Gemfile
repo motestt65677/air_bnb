@@ -49,6 +49,7 @@ gem 'fog'
 
 gem 'braintree'
 gem 'sidekiq'
+
 gem "letter_opener", :group => :development
 
 group :development, :test do
