@@ -8,14 +8,15 @@
         <%= form_for @user do |form| %>
           <%= render partial: '/users/form', object: form %>
 
-          <div class="submit-field">
-            <%= form.submit %>
+          <div class="top-padding">
+            <%= form.submit "Sign Up", class:"btn btn-outline-primary" %>           
           </div>
 
-          <div class="other-links">
-            <%= link_to t(".sign_in"), sign_in_path %>
-          </div>
         <% end %>
+          </div>
+            <%= link_to t(".sign_in"), sign_in_path, class:"float-right" %>
+
+
       </div>      
 
 
@@ -26,5 +27,4 @@
 
 
 </main>
-
 
