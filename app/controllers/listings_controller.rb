@@ -74,12 +74,8 @@ class ListingsController < ApplicationController
 	private
 	def listing_params
 
-		if params[:listing][:image].count == 0 
-	    params.require(:listing).permit(:title, :description, {amenities: []})
 
-		else
-  	  params.require(:listing).permit(:title, :description, {image: [], amenities: []})
+  	  params.require(:listing).permit(:title, :description, :price, {image: [], amenities: []})
 
-		end
   end
 end
