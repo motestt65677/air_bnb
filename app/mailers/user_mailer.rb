@@ -19,4 +19,18 @@ class UserMailer < ApplicationMailer
 
   end
 
+  def password_recorvery_email(email)
+    @user = User.find_by_email(email)
+
+
+
+
+    @url = edit_user_password_url(@user)
+
+
+
+    
+    mail(to: email, subject: 'Airbnb Password Reset')
+  end
+
 end

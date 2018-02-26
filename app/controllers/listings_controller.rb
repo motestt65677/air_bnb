@@ -22,10 +22,10 @@ class ListingsController < ApplicationController
 
 	def new
 		if signed_in?
-			if current_user.moderator?
+			if current_user.host?
 				@listing = Listing.new
 			else
-				flash[:notice] = "You are not a moderator"
+				flash[:notice] = "You are not a host"
 				redirect_to listings_path
 			end
 		else
@@ -35,7 +35,7 @@ class ListingsController < ApplicationController
 
 	def create
 		
-		if current_user.moderator?
+		if current_user.host?
 
 			@listing = current_user.listings.new(listing_params)
 			if @listing.save
@@ -44,7 +44,7 @@ class ListingsController < ApplicationController
 				redirect_to new_listing_path
 			end
 		else
-			flash[:notice] = "You are not a moderator"
+			flash[:notice] = "You are not a host"
 			redirect_to listings_path
 		end
 	end

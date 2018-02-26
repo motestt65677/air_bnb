@@ -1,1 +1,2 @@
-worker: bundle exec sidekiq -q default -q mailers -t 25
+web: bundle exec puma
+worker: bundle exec sidekiq -t 25 -c 5 -v

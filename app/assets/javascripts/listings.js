@@ -12,5 +12,5 @@ $(document).on('turbolinks:load',function(){
     city_form.submit();
   }
 
-
+;
 })

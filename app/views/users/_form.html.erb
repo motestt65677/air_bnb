@@ -1,40 +1,71 @@
-<div class="text-field">
-  <%= form.label :email %>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Sign Up As</span>
+  </div>
+  <%= form.select :role, options_for_select([["Visitor", 2], ["Host", 0]]), {}, class:"custom-select" %>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+  </div>
   <%= form.text_field :email, type: 'email' %>
 </div>
 
-<div class="password-field">
-  <%= form.label :password %>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Password</span>
+  </div>
   <%= form.password_field :password %>
 </div>
 
-<div class="first-name-field">
-  <%= form.label :first_name %>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">First Name</span>
+  </div>
   <%= form.text_field :first_name %>
 </div>
 
-<div class="last-name-field">
-  <%= form.label :last_name %>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Last Name</span>
+  </div>
   <%= form.text_field :last_name %>
 </div>
 
-<div class="gender-field">
-  <%= form.label :gender %>
-  <%= form.text_field :gender %>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Gender</span>
+  </div>
+  <%= form.select :gender, options_for_select([["Male", "1"], ["Female", "2"]]), {}, class:"custom-select" %>
 </div>
 
-<div class="phone-field">
-  <%= form.label :phone %>
+
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Phone Number</span>
+  </div>
   <%= form.text_field :phone %>
 </div>
 
-<div class="country-field">
-  <%= form.label :country %>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Country</span>
+  </div>
   <%= form.text_field :country %>
 </div>
 
-<div class="birthdate-field">
-  <%= form.label :birthdate %>
-  <%= form.text_field :birthdate %>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Birthdate</span>
+  </div>
+  <%= render partial: '/users/birth', object: form %>
+
 </div>
+
 

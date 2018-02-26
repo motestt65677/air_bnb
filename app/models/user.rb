@@ -3,7 +3,8 @@ class User < ApplicationRecord
   has_many :authentications, dependent: :destroy
   has_many :listings, dependent: :destroy
   has_many :reservations
-	enum role: { admin: 1, moderator: 0, customer: 2}
+	enum role: { admin: 1, host: 0, traveler: 2}
+	enum gender: { male: 1, female: 2}
 	def self.create_with_auth_and_hash(authentication, auth_hash)
 	  user = self.create!(
 	    first_name: auth_hash["info"]["first_name"],
