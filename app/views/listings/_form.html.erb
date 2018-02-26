@@ -3,7 +3,9 @@
 
 <div><strong>	<%= form.label :description %></strong></div>
 <div> <%= form.text_area :description, class:"form-control", rows:"5" %></div>
-
+<p><strong>Price</strong></p>
+  <%=form.number_field :price, class:"form_control", step:"0.01"%>
+<p><strong>Amenities</strong></p>
 <div>
 	<%= form.label :Wifi %>
 	<%=form.check_box :amenities, {multiple:true}, "Wifi", nil%>
