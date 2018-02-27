@@ -11,25 +11,30 @@
         <%= link_to "Create", new_listing_path, class: "btn btn-outline-secondary"%>
       <%end%>
 
+      <div class="dropdown float-right">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Search
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <%=form_tag 'listings', id:"date_form", method:"get" do %>
+            <%=text_field_tag "search", nil, id:"search", value:params[:search], placeholder:"e.g. Tokyo"%>
+            <%= select_tag 'city', options_for_select(Listing.pluck(:city).uniq, params[:city]),prompt: "All Cities"%>
+            <%=text_field_tag "date", nil ,id:"date", value:params[:date]%>
+            <div>
+              <strong>Amenities</strong> 
+              Wifi
+              <%=check_box_tag "amenities[]", "Wifi", params[:amenities] && params[:amenities].include?("Wifi")%>
+              Cable TV
+              <%=check_box_tag "amenities[]", "Cable TV", params[:amenities] && params[:amenities].include?("Cable TV")%>
+              Air Conditioning
+              <%=check_box_tag "amenities[]", "Air Conditioning", params[:amenities] && params[:amenities].include?("Air Conditioning")%>
+            </div>
 
-      <%=form_tag 'listings', id:"date_form", method:"get" do %>
-        <%= select_tag 'city', options_for_select(Listing.pluck(:city).uniq, @city),prompt: "All Cities"%>
-        <%=text_field_tag "date", nil ,id:"date"%>
-        <div>
-          <strong>Amenities</strong> 
-          Wifi
-          <%=check_box_tag "amenities[]", "Wifi", false%>
-          Cable TV
-          <%=check_box_tag "amenities[]", "Cable TV", false%>
-          Air Conditioning
-          <%=check_box_tag "amenities[]", "Air Conditioning", false%>
+            <%=submit_tag "Apply"%> <%=link_to "clear", "/listings"%>
+          <%end%>
+
         </div>
-        <%=submit_tag "Apply"%>
-
-
-
-
-      <%end%>
+      </div>
 
 
 			<hr>

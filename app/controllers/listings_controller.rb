@@ -5,10 +5,15 @@ class ListingsController < ApplicationController
 
 
 
+
 		@listing = Listing.new
 		if signed_in?
-
 			@listings = Listing.all
+
+			if params[:search].present?
+				@listings = Listing.search_by_title(params[:search])
+			end
+
 			if params[:city].present?
 				@listings = @listings.city(params[:city])
 			end
@@ -23,9 +28,6 @@ class ListingsController < ApplicationController
 			if params[:amenities].present?
 
 				@listings = Listing.amenities(params[:amenities], @listings)
-
-
-
 			end
 
 
