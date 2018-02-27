@@ -10,49 +10,73 @@
 			<%if current_user.host?%>
         <%= link_to "Create", new_listing_path, class: "btn btn-outline-secondary"%>
       <%end%>
-      <%=form_tag '/listings', id:"city_form", method:"get" do %>
-        <%= select_tag 'cities', options_for_select(Listing.pluck(:city).uniq, @city),prompt: "All Cities"%>
+
+
+      <%=form_tag 'listings', id:"date_form", method:"get" do %>
+        <%= select_tag 'city', options_for_select(Listing.pluck(:city).uniq, @city),prompt: "All Cities"%>
+        <%=text_field_tag "date", nil ,id:"date"%>
+        <div>
+          <strong>Amenities</strong> 
+          Wifi
+          <%=check_box_tag "amenities[]", "Wifi", false%>
+          Cable TV
+          <%=check_box_tag "amenities[]", "Cable TV", false%>
+          Air Conditioning
+          <%=check_box_tag "amenities[]", "Air Conditioning", false%>
+        </div>
+        <%=submit_tag "Apply"%>
+
+
+
+
       <%end%>
+
+
 			<hr>
 	    <div class="row">
-			<%@listings.each do |listing|%>
+      <%if @listings.count != 0%>
 
-	    		<div class="col-4">
-            <%if listing.image.count != 0 %>
-                <p><%= image_tag listing.image[0], class:"img-thumbnail" %></p>
-            <%else %>
-              <p><%= image_tag "gallery/default.jpg", class:"img-thumbnail"%> </p>
-            <%end%>
-						
+  			<%@listings.each do |listing|%>
 
-						<%= link_to listing_path(listing), class: "list-group-item list-group-item-action list-group-item-light" do%> 
-							<h5>	<%=listing.title%></h5>
-              <div> <%=listing.city%></div>
+  	    		<div class="col-4">
+              <%if listing.image.count != 0 %>
+                  <p><%= image_tag listing.image[0], class:"img-thumbnail" %></p>
+              <%else %>
+                <p><%= image_tag "gallery/default.jpg", class:"img-thumbnail"%> </p>
+              <%end%>
+  						
 
-						<%end%>
-						<div class="btn-container">
+  						<%= link_to listing_path(listing), class: "list-group-item list-group-item-action list-group-item-light" do%> 
+  							<h5>	<%=listing.title%></h5>
+                <div> <%=listing.city%></div>
 
-							<span> &nbsp</span>
-							<%if current_user.id == listing.user_id%>
-								<%= link_to "Edit", edit_listing_path(listing), class:"btn btn-outline-primary btn-block"%>
+  						<%end%>
+  						<div class="btn-container">
 
-								<%= link_to 'Delete', listing_path(listing), class:"btn btn-outline-danger btn-block",
-																					method: :delete, 
-							                            data: { confirm: 'Are you sure?' }%> 
-						  <%end%>		
-							<span> &nbsp</span>
-						  		
-						</div>  	                      
+  							<span> &nbsp</span>
+  							<%if current_user.id == listing.user_id%>
+  								<%= link_to "Edit", edit_listing_path(listing), class:"btn btn-outline-primary btn-block"%>
 
-
-
-	    		</div>
+  								<%= link_to 'Delete', listing_path(listing), class:"btn btn-outline-danger btn-block",
+  																					method: :delete, 
+  							                            data: { confirm: 'Are you sure?' }%> 
+  						  <%end%>		
+  							<span> &nbsp</span>
+  						  		
+  						</div>  	                      
 
 
 
+  	    		</div>
 
 
-			<%end%>
+
+
+
+  			<%end%>
+      <%end%>
+
+
 	    </div>
 
 			<hr>

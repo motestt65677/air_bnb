@@ -2,19 +2,35 @@
 class ListingsController < ApplicationController
 	def index
 		# @listings = Listing.all
+
+
+
 		@listing = Listing.new
 		if signed_in?
-			
-			if params[:cities] == ""
-				@listings = Listing.order(created_at: :desc).page(params[:page])
-				return
-			elsif params[:cities]
-				@listings = Listing.where(city: params[:cities]).page(params[:page])
-				@city = params[:cities]
-			else
-				@listings = Listing.order(created_at: :desc).page(params[:page])
+
+			@listings = Listing.all
+			if params[:city].present?
+				@listings = @listings.city(params[:city])
 			end
-			
+
+			if params[:date].present?
+				(start_date, end_date) = params[:date].split(" to ")
+				date_span = (start_date.to_date..end_date.to_date).to_a
+				date_span.map!{|date| date.to_s}
+				@listings = Listing.date(date_span, @listings)
+			end
+
+			if params[:amenities].present?
+
+				@listings = Listing.amenities(params[:amenities], @listings)
+
+
+
+			end
+
+
+
+			@listings = @listings.page(params[:page])
 		else
 			redirect_to sign_in_path
 		end
