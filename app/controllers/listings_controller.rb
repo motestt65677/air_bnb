@@ -7,11 +7,13 @@ class ListingsController < ApplicationController
 
 
 		@listing = Listing.new
+
+
 		if signed_in?
 			@listings = Listing.all
 
-			if params[:search].present?
-				@listings = Listing.search_by_title(params[:search])
+			if params[:city_search].present?
+				@listings = Listing.search_by_title(params[:city_search])
 			end
 
 			if params[:city].present?
@@ -36,6 +38,15 @@ class ListingsController < ApplicationController
 		else
 			redirect_to sign_in_path
 		end
+	end
+
+	def search
+		cities = Listing.search_city(params["query"])
+		# respond_to do |format|
+		# 	format.html
+		# 	format.json { render json: cities }
+		# end
+    render json: cities
 	end
 
 	def new

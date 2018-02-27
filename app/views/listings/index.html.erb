@@ -11,14 +11,22 @@
         <%= link_to "Create", new_listing_path, class: "btn btn-outline-secondary"%>
       <%end%>
 
-      <div class="dropdown float-right">
+      <%=form_tag listings_path, id:"search_form", method:"post" do%>
+
+      <%end%>
+
+      <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Search
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <%=form_tag 'listings', id:"date_form", method:"get" do %>
-            <%=text_field_tag "search", nil, id:"search", value:params[:search], placeholder:"e.g. Tokyo"%>
-            <%= select_tag 'city', options_for_select(Listing.pluck(:city).uniq, params[:city]),prompt: "All Cities"%>
+            <%=text_field_tag "city_search", nil, list: "list", placeholder:"e.g.Tokyo"%> 
+            <datalist id="list"></datalist>
+
+            <%#=text_field_tag "search", nil, value:params[:search], placeholder:"e.g. Tokyo"%>
+
+            <%#= select_tag 'city', options_for_select(Listing.pluck(:city).uniq, params[:city]),prompt: "All Cities"%>
             <%=text_field_tag "date", nil ,id:"date", value:params[:date]%>
             <div>
               <strong>Amenities</strong> 

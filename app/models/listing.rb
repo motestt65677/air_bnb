@@ -27,5 +27,16 @@ class Listing < ApplicationRecord
     x = Listing.where(id: x.map(&:id))
   end
 
+  def self.search_city(query)
+    
+
+    where("city ILIKE :city", city: "%#{query}%").map do |record|
+      p record.city 
+    end
+
+
+
+  end
+
 
 end
