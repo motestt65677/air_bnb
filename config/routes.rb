@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'payment/:reservation_id/new' => "payments#new", as:"new_payment"
   post 'payment/:reservation_id/checkout' => "payments#checkout", as: "check_out"
+  post 'listings/search' => "listings#search"
 
   
 	get "/auth/:provider/callback" => "sessions#create_from_omniauth"  	
