@@ -115,7 +115,7 @@ class ListingsController < ApplicationController
 
 	private
 	def listing_params
-  	  params.require(:listing).permit(:title, :description, :price, {image: [], amenities: []})
+  	  params.require(:listing).permit(:title, :city, :description, :price, {image: [], amenities: []})
   end
   def slice_listing_params
   	params.slice(:city_search, :date, :amenities)
