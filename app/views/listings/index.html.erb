@@ -7,26 +7,15 @@
 
     </div>
     <div class="col-8">
-			<%if current_user.host?%>
-        <%= link_to "Create", new_listing_path, class: "btn btn-outline-secondary"%>
-      <%end%>
-
-      <%=form_tag listings_path, id:"search_form", method:"post" do%>
-
-      <%end%>
-
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Search
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <%=form_tag 'listings', id:"date_form", method:"get" do %>
-            <%=text_field_tag "city_search", nil, list: "list", placeholder:"e.g.Tokyo"%> 
-            <datalist id="list"></datalist>
+        <%=form_tag listings_search_path, id:"date_form", method:"POST", remote: true do %>
+          <%=text_field_tag "city_search", nil, list: "list", placeholder:"e.g.Tokyo"%> 
+          <datalist id="list"></datalist>
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-            <%#=text_field_tag "search", nil, value:params[:search], placeholder:"e.g. Tokyo"%>
-
-            <%#= select_tag 'city', options_for_select(Listing.pluck(:city).uniq, params[:city]),prompt: "All Cities"%>
             <%=text_field_tag "date", nil ,id:"date", value:params[:date]%>
             <div>
               <strong>Amenities</strong> 
@@ -37,65 +26,53 @@
               Air Conditioning
               <%=check_box_tag "amenities[]", "Air Conditioning", params[:amenities] && params[:amenities].include?("Air Conditioning")%>
             </div>
-
-            <%=submit_tag "Apply"%> <%=link_to "clear", "/listings"%>
-          <%end%>
-
-        </div>
+            <%=submit_tag "Apply"%> 
+            <%=link_to "clear", "/listings"%>
+          </div>
+        <%end%>
       </div>
-
-
-			<hr>
-	    <div class="row">
-      <%if @listings.count != 0%>
-
-  			<%@listings.each do |listing|%>
-
-  	    		<div class="col-4">
-              <%if listing.image.count != 0 %>
-                  <p><%= image_tag listing.image[0], class:"img-thumbnail" %></p>
-              <%else %>
-                <p><%= image_tag "gallery/default.jpg", class:"img-thumbnail"%> </p>
-              <%end%>
-  						
-
-  						<%= link_to listing_path(listing), class: "list-group-item list-group-item-action list-group-item-light" do%> 
-  							<h5>	<%=listing.title%></h5>
-                <div> <%=listing.city%></div>
-
-  						<%end%>
-  						<div class="btn-container">
-
-  							<span> &nbsp</span>
-  							<%if current_user.id == listing.user_id%>
-  								<%= link_to "Edit", edit_listing_path(listing), class:"btn btn-outline-primary btn-block"%>
-
-  								<%= link_to 'Delete', listing_path(listing), class:"btn btn-outline-danger btn-block",
-  																					method: :delete, 
-  							                            data: { confirm: 'Are you sure?' }%> 
-  						  <%end%>		
-  							<span> &nbsp</span>
-  						  		
-  						</div>  	                      
-
-
-
-  	    		</div>
-
-
-
-
-
-  			<%end%>
+      <%if current_user.host? || current_user.admin?%>
+        <%= link_to "Create", new_listing_path, class: " btn btn-outline-secondary"%>
       <%end%>
 
+      <hr>
+      <section id="listings">
+        <div class="row">
+        <%if @listings.count != 0%>
+    			<%@listings.each do |listing|%>
+    	    		<div class="col-4">
+                <%if listing.image.count != 0 %>
+                    <p><%= image_tag listing.image[0], class:"img-thumbnail" %></p>
+                <%else %>
+                  <p><%= image_tag "gallery/default.jpg", class:"img-thumbnail"%> </p>
+                <%end%>
+    						
+    						<%= link_to listing_path(listing), class: "list-group-item list-group-item-action list-group-item-light" do%> 
+    							<h5>	<%=listing.title%></h5>
+                  <div> <%=listing.city%></div>
+    						<%end%>
+    						<div class="btn-container">
+    							<span> &nbsp</span>
+    							<%if current_user.id == listing.user_id || current_user.admin?%>
+    								<%= link_to "Edit", edit_listing_path(listing), class:"btn btn-outline-primary btn-block"%>
 
-	    </div>
-
+    								<%= link_to 'Delete', listing_path(listing), class:"btn btn-outline-danger btn-block",
+    																					method: :delete, 
+    							                            data: { confirm: 'Are you sure?' }%> 
+    						  <%end%>		
+    							<span> &nbsp</span>
+    						</div>  	                      
+    	    		</div>
+    			<%end%>
+        <%end%>
+            
+            
+        </div>
+      </section>      
 			<hr>
-
-			<%= paginate @listings %>
-
+      <div id="paginate">      
+        <%= paginate @listings %>
+      </div>
     </div>
     <div class="col-2">
     </div>

@@ -1,0 +1,16 @@
+// console.log("js");
+
+$("#listings").html("");
+
+
+$("<%= escape_javascript( render :partial => "listing", :object => @listings)%>").appendTo("#listings");
+$("#paginate").html("");
+
+     
+$("<%= paginate @listings %>").appendTo("#paginate");
+
+
+// $("<%= escape_javascript(render @listings)%>").appendTo("#listings");
+
+
+

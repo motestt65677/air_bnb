@@ -7,10 +7,4 @@ $(document).on('turbolinks:load',function(){
 
   const calendar = document.getElementById("calendar");
 
-  console.log("check")
-
-
-
-
-
 })

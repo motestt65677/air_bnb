@@ -7,7 +7,33 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
+  
 
+# environment_seed_file = File.join(Rails.root, 'db', 'seeds', "#{Rails.env}.rb")
+
+# def seed_image(file_name)
+#   File.open(File.join(Rails.root, "/app/assets/images/#{file_name}.jpeg"))
+# end
+
+# products = [
+#   {:name => 'foo', :description => 'lorem ipsum',   :product_type => ProductType.find_by_name('Sandwiches')},
+#   {:name => 'bar', :description => 'dolerem ipsum', :product_type => ProductType.find_by_name('Soups')}
+# ]
+listings = Listing.all
+def image_rand
+  number = (1..10).to_a
+  image_data = File.open(Rails.root+ "app/assets/images/#{number.sample}.jpg")
+end
+
+listings.each do |listing|
+
+  listing.image = [image_rand, image_rand, image_rand]
+  # listing[:image].push(image_data)
+  listing.save
+end
+
+
+# Listing.find_or_create_by_name(attributes[:name], attributes)
 # cities = %w(Kabul London Taipei Kuala Lumpur Canberra Beijing Berlin Moscow Seoul Pyongyang Manila Cape_Town Rome Tokyo)
 # listings = Listing.all
 
