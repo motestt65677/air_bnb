@@ -2,7 +2,6 @@
 
 $(document).on('turbolinks:load',function(){
   var city_input = document.getElementById("city_search");
-  console.log(city_input)
   if (city_input){
     city_input.addEventListener("keyup", function(event){
       autocomplete(event)
@@ -32,9 +31,7 @@ $(document).on('turbolinks:load',function(){
       window.globalXHR.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
           //convert json response to an object
-          console.log(this)
-          var response = JSON.parse(this.responseText)
-
+          var response = JSON.parse(this.responseText)  
           //clear previous results
           list.innerHTML = ""
 
@@ -54,7 +51,7 @@ $(document).on('turbolinks:load',function(){
       // more info can be found at the link below
       // https://www.checkmarx.com/2016/01/22/ultimate-guide-understanding-preventing-csrf/
       var auth_token = document.querySelector("[name='csrf-token']").content
-      window.globalXHR.open("POST", "/listings/search?query=" + input.value, true)
+      window.globalXHR.open("POST", "/listings/autocomplete?query=" + input.value, true)
       //allow js to make request to rails server
       window.globalXHR.setRequestHeader("X-CSRF-TOKEN", auth_token)
       window.globalXHR.send()
