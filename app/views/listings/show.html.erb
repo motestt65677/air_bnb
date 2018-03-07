@@ -30,9 +30,8 @@
 				</ul>
 
 			<%=form_for @listing, url:"/listings/#{params[:id]}/uploadimage", html:{id:"image_form"}, method:"post"  do |f|%>
-					<%= text_field_tag "text"%>
 					<%= f.file_field :image, multiple:true, name:"images",id:"ajax_images" %>
-				  <%= f.submit "Update Picture", id:"image_submit", data:{disable_with: false} %>			  
+				  <%= f.submit "Add Picture", id:"image_submit", data:{disable_with: false} %>			  
 			<%end%>
 
 	    </div>
