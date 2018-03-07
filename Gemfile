@@ -18,7 +18,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -29,10 +28,8 @@ gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'faker'
-
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
-
 gem 'kaminari'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
@@ -43,22 +40,15 @@ gem 'kaminari'
 # gem 'capistrano-rails', group: :development
 
 gem "clearance"
-
 gem 'carrierwave'
 gem 'fog'
-
 gem 'braintree'
 gem 'sidekiq'
-
 gem "letter_opener", :group => :development
-
 gem "skylight"
-
 gem 'pg_search'
 gem 'pry-rails', :group => :development
-
 gem 'rack-cors'
-gem "paperclip", "~> 5.0.0.beta1"
 
 
 group :development, :test do
@@ -67,6 +57,16 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'rspec-rails', '~> 3.7'
+  gem 'rspec'
+  gem 'rspec-given'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-puma'
+
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
+  
 end
 
 group :development do

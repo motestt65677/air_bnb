@@ -98,17 +98,17 @@ class ListingsController < ApplicationController
 	end
 
 	def uploadimage
+		@listing = Listing.find(params[:listing_id])
 
-		listing = Listing.find(params[:listing_id])
+		images = @listing.image
 
-
-		listing.update_attributes(image: params[:images])
-
+		images += params[:images]
+		@listing.image = images
+		@listing.save
+		
 		respond_to do |format|
-		  format.json { render json: listing}
+		  format.json { render json: @listing}
 		end
-
-
 	end
 
 

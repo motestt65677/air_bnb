@@ -10,7 +10,6 @@ class PaymentsController < ApplicationController
     @costumer = @reservation.user
 
     nonce_from_the_client = params[:checkout_form][:payment_method_nonce]
-
     result = Braintree::Transaction.sale(
      :amount => reservation.price, #this is currently hardcoded
      :payment_method_nonce => nonce_from_the_client,
