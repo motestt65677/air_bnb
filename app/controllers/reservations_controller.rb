@@ -19,12 +19,12 @@ class ReservationsController < ApplicationController
 
   def itinerary
     @reservations = current_user.reservations.order(created_at: :desc)
-
   end
 
   def show 
     @reservation = Reservation.find(params[:id])
   end
+
   private
 
 
