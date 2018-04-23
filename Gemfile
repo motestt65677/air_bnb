@@ -49,7 +49,7 @@ gem "skylight"
 gem 'pg_search'
 gem 'pry-rails', :group => :development
 gem 'rack-cors'
-
+gem "loofah", "~> 2.2.1"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
