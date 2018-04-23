@@ -1,35 +1,39 @@
-
-
-
-<main>
+<div class="listing-house-top">
   <div class="row">
-    <div class="col-2">
-
+    <div class="listing-search-form-box">
+      <h1>Find homes on Airbnb</h1>
+      <h5>Discover entire homes and private rooms perfect for any trips.</h5>
+      <%=form_tag listings_search_path, id:"date_form", method:"POST", remote: true do %>
+        <h7>WHERE</h7>
+        <%=text_field_tag "city_search", nil, list: "list", placeholder:"e.g.Tokyo", class:"full-length"%> 
+        <datalist id="list"></datalist>
+        <h7>CHECK IN</h7>
+        <%=text_field_tag "date", nil ,id:"date", value:params[:date], class:"full-length"%>
+        <div>
+          <h7>AMENITIES</h7> 
+          <div>
+            Wifi
+            <%=check_box_tag "amenities[]", "Wifi", params[:amenities] && params[:amenities].include?("Wifi")%>
+            Cable TV
+            <%=check_box_tag "amenities[]", "Cable TV", params[:amenities] && params[:amenities].include?("Cable TV")%>
+            Air Conditioning
+            <%=check_box_tag "amenities[]", "Air Conditioning", params[:amenities] && params[:amenities].include?("Air Conditioning")%>
+          </div>  
+        </div>
+        <%=submit_tag "Search", class:"full-length btn btn-danger"%> 
+        <%=link_to "clear", "/listings"%>
+      <%end%>
     </div>
-    <div class="col-8">
-      <div class="dropdown">
-        <%=form_tag listings_search_path, id:"date_form", method:"POST", remote: true do %>
-          <%=text_field_tag "city_search", nil, list: "list", placeholder:"e.g.Tokyo"%> 
-          <datalist id="list"></datalist>
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Filter
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  </div>
+  
+</div>
 
-            <%=text_field_tag "date", nil ,id:"date", value:params[:date]%>
-            <div>
-              <strong>Amenities</strong> 
-              Wifi
-              <%=check_box_tag "amenities[]", "Wifi", params[:amenities] && params[:amenities].include?("Wifi")%>
-              Cable TV
-              <%=check_box_tag "amenities[]", "Cable TV", params[:amenities] && params[:amenities].include?("Cable TV")%>
-              Air Conditioning
-              <%=check_box_tag "amenities[]", "Air Conditioning", params[:amenities] && params[:amenities].include?("Air Conditioning")%>
-            </div>
-            <%=submit_tag "Apply"%> 
-            <%=link_to "clear", "/listings"%>
-          </div>
-        <%end%>
+
+<main class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="dropdown">
+        
       </div>
       <%if current_user.host? || current_user.admin?%>
         <%= link_to "Create", new_listing_path, class: " btn btn-outline-secondary"%>
@@ -37,46 +41,12 @@
 
       <hr>
       <section id="listings">
-        <div class="row">
-        <%if @listings.count != 0%>
-    			<%@listings.each do |listing|%>
-    	    		<div class="col-4">
-    						<%= link_to listing_path(listing), class: "list-group-item list-group-item-action list-group-item-light" do%> 
-                  <%if listing.image.count != 0 %>
-                      <p><%= image_tag listing.image[0], class:"img-thumbnail" %></p>
-                  <%else %>
-                    <p><%= image_tag "gallery/default.jpg", class:"img-thumbnail"%> </p>
-                  <%end%>
-                  
-      							<h5>	<%=listing.title%></h5>
-                    <div> <%=listing.city%></div>
-                    <div>Updated <%=time_ago_in_words(listing.updated_at) %> ago</div>
-    						<%end%>
-                  <span> &nbsp</span>
-
-                  <div class="btn-container">
-                  <%if current_user.id == listing.user_id || current_user.admin?%>
-    								<%= link_to "Edit", edit_listing_path(listing), class:"btn btn-outline-primary btn-block"%>
-
-    								<%= link_to 'Delete', listing_path(listing), class:"btn btn-outline-danger btn-block",
-    																					method: :delete, 
-    							                            data: { confirm: 'Are you sure?' }%> 
-    						  <%end%>		
-    							<span> &nbsp</span>
-    						</div>  	                      
-    	    		</div>
-    			<%end%>
-        <%end%>
-            
-            
-        </div>
-      </section>      
+        <%= render partial: "listing", locals: {listings: @listings} %>
+      </section>
 			<hr>
       <div id="paginate">      
         <%= paginate @listings %>
       </div>
-    </div>
-    <div class="col-2">
     </div>
 
   </div>

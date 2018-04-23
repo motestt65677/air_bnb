@@ -19,22 +19,23 @@ require 'faker'
 #   {:name => 'foo', :description => 'lorem ipsum',   :product_type => ProductType.find_by_name('Sandwiches')},
 #   {:name => 'bar', :description => 'dolerem ipsum', :product_type => ProductType.find_by_name('Soups')}
 # ]
-listings = Listing.all
-def image_rand
-  number = (1..10).to_a
-  image_data = File.open(Rails.root+ "app/assets/images/#{number.sample}.jpg")
-end
 
-listings.each do |listing|
+# listings = Listing.all
+# def image_rand
+#   number = (1..10).to_a
+#   image_data = File.open(Rails.root+ "app/assets/images/#{number.sample}.jpg")
+# end
 
-  listing.image = [image_rand, image_rand, image_rand]
-  # listing[:image].push(image_data)
-  listing.save
-end
+# listings.each do |listing|
+
+#   listing.image = [image_rand, image_rand, image_rand]
+#   # listing[:image].push(image_data)
+#   listing.save
+# end
 
 
 # Listing.find_or_create_by_name(attributes[:name], attributes)
-# cities = %w(Kabul London Taipei Kuala Lumpur Canberra Beijing Berlin Moscow Seoul Pyongyang Manila Cape_Town Rome Tokyo)
+cities = %w(Kabul London Taipei Kuala Lumpur Canberra Beijing Berlin Moscow Seoul Pyongyang Manila Cape_Town Rome Tokyo)
 # listings = Listing.all
 
 # listings.each do |listing|
@@ -78,7 +79,8 @@ end
 
 #     User.create(user)
 #   end
-# # end 
+# end 
+
 # listing = {}
 # uids = []
 # User.all.each { |u| uids << u.id }
@@ -87,9 +89,14 @@ end
 #   40.times do 
 #     listing['title'] = Faker::App.name
 #     listing['description'] = Faker::Hipster.sentence
-
-#     listing['user_id'] = uids.sample
+#     listing['price'] =  (1..20).to_a.sample * 100
+#     listing['user_id'] = 1
 
 #     Listing.create(listing)
 #   end
 # end
+
+Listing.all.each do |listing|
+  listing.city = cities.sample
+  listing.save
+end

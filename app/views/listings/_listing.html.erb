@@ -1,19 +1,21 @@
 <div class="row">
   <%if @listings.count != 0%>
     <%@listings.each do |listing|%>
-        <div class="col-4">
-          <%if listing.image.count != 0 %>
-              <p><%= image_tag listing.image[0], class:"img-thumbnail" %></p>
-          <%else %>
-            <p><%= image_tag "gallery/default.jpg", class:"img-thumbnail"%> </p>
-          <%end%>
-          
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
           <%= link_to listing_path(listing), class: "list-group-item list-group-item-action list-group-item-light" do%> 
-            <h5>  <%=listing.title%></h5>
-            <div> <%=listing.city%></div>
+            <%if listing.image.count != 0 %>
+                <p><%= image_tag listing.image[0], class:"img-thumbnail" %></p>
+            <%else %>
+              <p><%= image_tag "gallery/default.jpg", class:"img-thumbnail"%> </p>
+            <%end%>
+            
+              <h5>  <%=listing.title%></h5>
+              <div> <%=listing.city%></div>
+              <div>Updated <%=time_ago_in_words(listing.updated_at) %> ago</div>
           <%end%>
-          <div class="btn-container">
             <span> &nbsp</span>
+
+            <div class="btn-container">
             <%if current_user.id == listing.user_id || current_user.admin?%>
               <%= link_to "Edit", edit_listing_path(listing), class:"btn btn-outline-primary btn-block"%>
 
@@ -26,6 +28,4 @@
         </div>
     <%end%>
   <%end%>
-      
-      
 </div>

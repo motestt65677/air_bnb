@@ -63,3 +63,20 @@ img{
   height: 400px;
   background-color: grey;
 }
+
+.full-length{
+  width: 100%;
+}
+.listing-house-top{
+  background-image: url("listing-house-top2.jpg");
+  height: 50vh;
+  background-size: contain;
+  padding: 50px;
+}
+
+.listing-search-form-box{
+  padding: 20px;
+  max-width: 40em;
+  background-color: white;
+  border-radius: 5px;
+}
