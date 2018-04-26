@@ -21,7 +21,7 @@ class PaymentsController < ApplicationController
     if result.success?
       reservation.update_used_date
       reservation.update_attribute(:payment_status, true)
-      UserMailer.booking_email(@costumer, @host, @reservation.id).deliver_later
+      UserMailer.booking_email(@costumer, @host, @reservation.id).deliver_now
       
       redirect_to :root, :flash => { :success => "Transaction successful!" }
     else

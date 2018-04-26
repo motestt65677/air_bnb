@@ -71,18 +71,10 @@ class ListingsController < ApplicationController
 
 				@listings = Listing.amenities(params[:amenities], @listings)
 			end		
-
-
-
 			@listings = @listings.page(params[:page])
-
 			respond_to do |format|
 			  format.js
 			end
-
-
-
-			# render :file => "listings/index"
 		else
 			redirect_to sign_in_path
 		end

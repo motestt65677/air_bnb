@@ -3,11 +3,12 @@
 $("#listings").html("");
 
 
-$("<%= escape_javascript( render :partial => "listing", :object => @listings)%>").appendTo("#listings");
+$("<%= escape_javascript( render :partial => "listing", :locals => {:listings => @listings})%>").appendTo("#listings");
+
 $("#paginate").html("");
 
      
 $("<%= paginate @listings %>").appendTo("#paginate");
 
-
-
+console.log("here");
+console.log("<%=@listings%>")
