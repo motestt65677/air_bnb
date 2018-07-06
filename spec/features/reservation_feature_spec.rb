@@ -1,9 +1,9 @@
 require 'rails_helper'
 RSpec.describe "reservation process", :type => :feature do
 
-  let(:user){
-    User.create({remember_token: "asdfasdf", email:"asdf@gmail.com", password:"asdfasdf"})
-  }
+    let(:user){
+      User.create({remember_token: "asdfasdf", email:"asdf@gmail.com", password:"asdfasdf"})
+    }
 
   let(:listing){
     Listing.create({title:"sample listing", price: 100, user_id: user.id})
