@@ -22,21 +22,16 @@
 
 	    	<h1> <%=@listing.title%></h1>
 				<p> <%=@listing.description%></p>
+				<p><strong>Location</strong></p>
+				<p><%=@listing.city%></p>
 				<p><strong>Amenities</strong></p>
 				<ul>
 					<% @listing.amenities.each do |amenity| %>
 						<li><%=amenity%></li>
 					<% end %>
 				</ul>
-
-			<%=form_for @listing, url:"/listings/#{params[:id]}/uploadimage", html:{id:"image_form"}, method:"post"  do |f|%>
-					<%= f.file_field :image, multiple:true, name:"images",id:"ajax_images" %>
-				  <%= f.submit "Add Picture", id:"image_submit", data:{disable_with: false} %>			  
-			<%end%>
-
 	    </div>
 	    <div class="col-4">
-	    	<h3>My Google Maps Demo</h3>
 		    <div id="map"></div>
 
 	    </div>
